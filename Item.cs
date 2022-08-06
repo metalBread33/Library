@@ -8,11 +8,11 @@ namespace Library
 {
      class Item
     {
-       private string title;
-       private string author;
-       private char genre;
-        private bool isFinished;
-        private Item()
+       protected string title;
+        protected string author;
+        protected char genre;
+        protected bool isFinished;
+        public Item()
         {
            title = Console.ReadLine();
            author = Console.ReadLine();
@@ -20,7 +20,7 @@ namespace Library
            isFinished = false;
         }
 
-        private Item(string title, string author, char genre, bool finished)
+        public Item(string title, string author, char genre, bool finished)
         {
             this.title = title;
             this.author = author;
@@ -28,22 +28,22 @@ namespace Library
             this.isFinished = finished;
         }
 
-        private string getTitle()
+        protected string getTitle()
         {
             return title;
         }
 
-        private void setTitle()
+        protected void setTitle()
         {
             this.title = Console.ReadLine();
         }
 
-        private string getAuthor()
+        protected string getAuthor()
         {
             return author;
         }
 
-        private void setAuthor()
+        protected void setAuthor()
         {
             this.author = Console.ReadLine();
         }
