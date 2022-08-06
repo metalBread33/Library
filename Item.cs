@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-     class Item
+      class Item
     {
        protected string title;
         protected string author;
@@ -48,7 +48,10 @@ namespace Library
             this.author = Console.ReadLine();
         }
 
-
+        public override string ToString()
+        {
+            return "Title: " + title + "By: " + author;
+        }
 
     }
 }
