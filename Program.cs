@@ -8,8 +8,16 @@ namespace Libary
         List<Item> items;
         static void Main(string[] args)
         {
-            
+            int choice;
             Console.WriteLine("Welcome to Library Program");
+
+            do
+            {
+                Console.WriteLine("Please select a menu option");
+                Console.WriteLine("1) Add a new item\n2) Remove an item\n3) Edit an item");
+                choice = int.Parse(Console.ReadLine());
+            }
+            while (choice != 0);
             
         }
 
