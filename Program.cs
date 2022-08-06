@@ -8,9 +8,11 @@ namespace Libary
         static List<Item> items;
          static void Main(string[] args)
         {
-            int choice;
+            int choice, pageCount;
             Item newItem;
-            bool works;
+            bool works, finished;
+            string title, author;
+            char genre;
 
             Console.WriteLine("Welcome to Library Program");
 
@@ -33,8 +35,32 @@ namespace Libary
                 switch (choice)
                 {
                     case 1:
-                         newItem = new Item();
+                        Console.WriteLine("Please enter a title");
+                        title = Console.ReadLine();
+                        Console.WriteLine("Please enter the author's name");
+                        author = Console.ReadLine();
+                        Console.WriteLine("What genre is it (enter f for fantasy, " 
+                            + "s for sci-fi, t for thriller/horror," +
+                            " or n for non-fiction ");
+                        char.TryParse(Console.ReadLine(), out genre);
+
+                        bool goodChoice = true;
+                        do
+                        {
+                            Console.WriteLine("Have you finished this title yet? " +
+                                "(type 'y/Y' for yes or 'n/N' for no");
+                            if (Console.ReadLine() == "y" || Console.ReadLine() == "Y")
+                                finished = true;
+                            else if (Console.ReadLine() == "n" || Console.ReadLine() == "N")
+                                finished = false;
+                            else  goodChoice = false;
+
+                        } while (!goodChoice);
+
+
+                            newItem = new Item(title, author, genre, finished);
                         addItem(newItem);
+                      
                         break;
                     case 2:
                         int position;
