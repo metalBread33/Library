@@ -10,13 +10,13 @@ namespace Library
     internal class Book : Item
 
     {
-        protected int pages;
-        protected Book () : base ()
+        public int pages;
+        public Book () : base ()
         {
 
         }
 
-        protected Book (string title, string author, char genre, bool finished, int pageCount)
+        public Book (string title, string author, char genre, bool finished, int pageCount)
             : base (title, author, genre, finished)
         {
             this.title = title;

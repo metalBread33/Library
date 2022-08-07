@@ -21,7 +21,8 @@ namespace Libary
                 Console.WriteLine("1) Add a new item\n2) Remove an item" +
                     "\n3) Edit an item\n4) Print list\n0) Quit");
               bool ok = int.TryParse(Console.ReadLine(), out choice);
-                Item newItem = new Item();
+                Book book = new Book();
+                AudioBook audio = new AudioBook();
                 while (!validOption(choice) || !ok)
                 {
                     Console.WriteLine("Please enter a valid menu option " +
@@ -34,26 +35,71 @@ namespace Libary
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine("Please enter a title");
-                        newItem.title = Console.ReadLine();
+                        int type;
+                        do
+                        {
+                            Console.WriteLine("Will you be adding a book or an " +
+                                "audiobook?\n1) Book\n2) Audiobook\n0) Nevermind");
+                            int.TryParse(Console.ReadLine(), out type);
+                        } while (type > 3 || type < 0);
 
-                        Console.WriteLine("Please enter the author's name");
-                        newItem.author = Console.ReadLine();
+                        if (type == 0)
+                            break;
+                        else if (type == 1)
+                        {
+                            Console.WriteLine("Please enter a title");
+                            book.title = Console.ReadLine();
 
-                        Console.WriteLine("What genre is it (enter f for fantasy, " 
-                            + "s for sci-fi, t for thriller/horror," +
-                            " or n for non-fiction ");
-                         char.TryParse(Console.ReadLine(), out newItem.genre);
+                            Console.WriteLine("Please enter the author's name");
+                            book.author = Console.ReadLine();
 
-                        Console.WriteLine("Have you finished this title yet? " +
-                            "(type 'y/Y' for yes or 'n/N' for no)");
-                        char.TryParse(Console.ReadLine(), out fin);
-                        if (validOption(fin) && char.ToUpper(fin) == 'Y')
-                            newItem.isFinished = true;
-                        else newItem.isFinished = false;
+                            Console.WriteLine("What genre is it (enter f for fantasy, "
+                                + "s for sci-fi, t for thriller/horror," +
+                                " or n for non-fiction ");
+                            char.TryParse(Console.ReadLine(), out book.genre);
+
+                            Console.WriteLine("How long is it?");
+                            int.TryParse(Console.ReadLine(), out int length);
+                            book.pages = length;
+                            
+
+                            Console.WriteLine("Have you finished this title yet? " +
+                                "(type 'y/Y' for yes or 'n/N' for no)");
+                            char.TryParse(Console.ReadLine(), out fin);
+                            if (validOption(fin) && char.ToUpper(fin) == 'Y')
+                                book.isFinished = true;
+                            else book.isFinished = false;
+
+                            numItems++;
+                            addItem(book);
+                        }
+
+                        else if (type == 2)
+                        {
+                            Console.WriteLine("Please enter a title");
+                            audio.title = Console.ReadLine();
+
+                            Console.WriteLine("Please enter the author's name");
+                            audio.author = Console.ReadLine();
+
+                            Console.WriteLine("What genre is it (enter f for fantasy, "
+                                + "s for sci-fi, t for thriller/horror," +
+                                " or n for non-fiction ");
+                            char.TryParse(Console.ReadLine(), out audio.genre);
+
+                            Console.WriteLine("How many hours is it?");
+                            int.TryParse(Console.ReadLine(), out audio.hours);
+
+                            Console.WriteLine("Minutes?");
+                            int.TryParse(Console.ReadLine(), out audio.minutes);
+
+                            Console.WriteLine("Who narrated it?");
+                            audio.narrator = Console.ReadLine();
+
+                            numItems++;
+                            addItem(audio);
+                        }
                         
-                        numItems++;
-                        addItem(newItem);
                       
                         break;
 
