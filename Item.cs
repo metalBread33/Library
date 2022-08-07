@@ -8,15 +8,15 @@ namespace Library
 {
       class Item
     {
-       protected string title;
-        protected string author;
-        protected char genre;
-        protected bool isFinished;
+       public string title;
+        public  string author;
+        public char genre;
+        public bool isFinished;
         public Item()
         {
-           title = Console.ReadLine();
-           author = Console.ReadLine();
-           genre = Char.Parse(Console.ReadLine());
+           title ="";
+           author = "";
+         
            isFinished = false;
         }
 
@@ -50,7 +50,7 @@ namespace Library
 
         public override string ToString()
         {
-            return "Title: " + title + "By: " + author;
+            return "Title: " + title + " By: " + author;
         }
 
     }
