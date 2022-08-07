@@ -12,7 +12,7 @@ namespace Libary
             Item newItem;
             bool works, finished;
             string title, author;
-            char genre;
+            char genre, fin;
 
             Console.WriteLine("Welcome to Library Program");
 
@@ -37,28 +37,24 @@ namespace Libary
                     case 1:
                         Console.WriteLine("Please enter a title");
                         title = Console.ReadLine();
+
                         Console.WriteLine("Please enter the author's name");
                         author = Console.ReadLine();
+
                         Console.WriteLine("What genre is it (enter f for fantasy, " 
                             + "s for sci-fi, t for thriller/horror," +
                             " or n for non-fiction ");
                         char.TryParse(Console.ReadLine(), out genre);
 
-                        bool goodChoice = true;
-                        do
-                        {
-                            Console.WriteLine("Have you finished this title yet? " +
-                                "(type 'y/Y' for yes or 'n/N' for no");
-                            if (Console.ReadLine() == "y" || Console.ReadLine() == "Y")
-                                finished = true;
-                            else if (Console.ReadLine() == "n" || Console.ReadLine() == "N")
-                                finished = false;
-                            else  goodChoice = false;
-
-                        } while (!goodChoice);
+                        Console.WriteLine("Have you finished this title yet? " +
+                            "(type 'y/Y' for yes or 'n/N' for no");
+                        char.TryParse(Console.ReadLine(), out fin);
+                        if (validOption(fin) && char.ToUpper(fin) == 'Y')
+                            finished = true;
+                        else finished = false;
 
 
-                            newItem = new Item(title, author, genre, finished);
+                        newItem = new Item(title, author, genre, finished);
                         addItem(newItem);
                       
                         break;
@@ -109,6 +105,15 @@ namespace Libary
             if (choice < 0 || choice > 4)
                 return false;
             else return true;
+        }
+
+        static bool validOption (char c)
+        {
+            if (c == 'y' || c == 'n')
+                return true;
+            else if (c=='Y' || c=='N')
+                return true;
+            else return false;
         }
     }
 }
