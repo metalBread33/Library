@@ -59,12 +59,15 @@ namespace Libary
                         int position;
                         Console.WriteLine("Which entry would you like to remove?");
                         printList();
+
                         int.TryParse(Console.ReadLine(), out position);
-                        if (position >= numItems || position <= 0)
+                        if (position >= numItems || position < 0)
                             removeItem(position); 
                         else
                             Console.WriteLine("Please try again and enter a valid entry");
                         break;
+
+
                     case 3:
                         newItem = new Item();
                         int.TryParse(Console.ReadLine(), out position);
@@ -87,13 +90,13 @@ namespace Libary
 
         static void removeItem (int position)
         {
-            items.RemoveAt(position);
+            items.RemoveAt(position-1);
         }
 
         static void editItem (int position, Item newItem)
         {
-            items.RemoveAt (position);
-            items.Insert(position, newItem);
+            items.RemoveAt (position-1);
+            items.Insert(position-1, newItem);
         }
 
         static void printList ()
