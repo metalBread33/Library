@@ -8,10 +8,8 @@ namespace Libary
         static List<Item> items = new List<Item>();
          static void Main(string[] args)
         {
-            int choice, pageCount;
-            bool works, finished;
-            string title, author;
-            char genre, fin;
+            int choice, numItems = 0;
+            char fin;
 
             Console.WriteLine("Welcome to Library Program");
 
@@ -52,17 +50,24 @@ namespace Libary
                             newItem.isFinished = true;
                         else newItem.isFinished = false;
                         
+                        numItems++;
                         addItem(newItem);
                       
                         break;
+
                     case 2:
                         int position;
-                        works = int.TryParse(Console.ReadLine(), out position);
-                        removeItem(position);
+                        Console.WriteLine("Which entry would you like to remove?");
+                        printList();
+                        int.TryParse(Console.ReadLine(), out position);
+                        if (position >= numItems || position <= 0)
+                            removeItem(position); 
+                        else
+                            Console.WriteLine("Please try again and enter a valid entry");
                         break;
                     case 3:
                         newItem = new Item();
-                        works = int.TryParse(Console.ReadLine(), out position);
+                        int.TryParse(Console.ReadLine(), out position);
                         editItem(position, newItem);
                         break;
                     case 4:
@@ -93,8 +98,8 @@ namespace Libary
 
         static void printList ()
         {
-            foreach (var item in items)
-                Console.WriteLine(item.ToString());
+            for (int i = 0; i < items.Count; i++)
+                Console.WriteLine(i+1 + " " + items[i].ToString());
         }
 
        static bool validOption (int choice)
