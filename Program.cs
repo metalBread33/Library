@@ -15,6 +15,8 @@ namespace Libary
 
             do
                 {
+                int position;
+
                 Console.WriteLine("Please select a menu option");
                 Console.WriteLine("1) Add a new item\n2) Remove an item" +
                     "\n3) Edit an item\n4) Print list\n0) Quit");
@@ -44,7 +46,7 @@ namespace Libary
                          char.TryParse(Console.ReadLine(), out newItem.genre);
 
                         Console.WriteLine("Have you finished this title yet? " +
-                            "(type 'y/Y' for yes or 'n/N' for no");
+                            "(type 'y/Y' for yes or 'n/N' for no)");
                         char.TryParse(Console.ReadLine(), out fin);
                         if (validOption(fin) && char.ToUpper(fin) == 'Y')
                             newItem.isFinished = true;
@@ -56,7 +58,6 @@ namespace Libary
                         break;
 
                     case 2:
-                        int position;
                         Console.WriteLine("Which entry would you like to remove?");
                         printList();
 
@@ -69,12 +70,19 @@ namespace Libary
 
 
                     case 3:
-                        newItem = new Item();
+                        
+                        Console.WriteLine("Which item would you like to edit?");
+                        printList();
+
                         int.TryParse(Console.ReadLine(), out position);
-                        editItem(position, newItem);
+                        editItem(position);
                         break;
+                   
                     case 4:
                         printList();
+                        break;
+
+                    default:
                         break;
                 }
                     
@@ -93,11 +101,56 @@ namespace Libary
             items.RemoveAt(position-1);
         }
 
-        static void editItem (int position, Item newItem)
+        static void editItem(int position)
         {
-            items.RemoveAt (position-1);
-            items.Insert(position-1, newItem);
-        }
+            Item itemEdit = items[position - 1];
+            int editWhat; char fin;
+            do
+                {
+                    Console.WriteLine("What details would you like to change?");
+                    Console.WriteLine("1) Title: " + itemEdit.title);
+                    Console.WriteLine("2) Author: " + itemEdit.author);
+                    Console.WriteLine("3) Genre: " + itemEdit.genre);
+                    Console.WriteLine("4) Completed: " + itemEdit.isFinished);
+                    Console.WriteLine("0) Finished");
+                    int.TryParse(Console.ReadLine(), out editWhat);
+
+                    switch (editWhat)
+                    {
+                        case 1:
+                            Console.WriteLine("What is the new title?");
+                            itemEdit.title = Console.ReadLine();
+                            break;
+
+                        case 2:
+                            Console.WriteLine("Who is the new author?");
+                            itemEdit.author = Console.ReadLine();
+                            break;
+
+                        case 3:
+                            Console.WriteLine("What is the new genre?(enter f for fantasy, " 
+                            + "s for sci-fi, t for thriller/horror," +
+                            " or n for non-fiction ");
+                            char.TryParse(Console.ReadLine(), out itemEdit.genre);
+
+                        break;
+
+                        case 4:
+                            Console.WriteLine("Have you finished this book? " +
+                                "(type 'y/Y' for yes or 'n/N' for no)");
+                            char.TryParse(Console.ReadLine(), out fin);
+                            if (validOption(fin) && char.ToUpper(fin) == 'Y')
+                                itemEdit.isFinished = true;
+                            else itemEdit.isFinished = false;
+                        break;
+
+                        default:
+                            break;
+                    }
+
+
+                } while (editWhat != 0);
+            }
 
         static void printList ()
         {
@@ -121,4 +174,4 @@ namespace Libary
             else return false;
         }
     }
-}
+} 
