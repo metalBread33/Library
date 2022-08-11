@@ -19,7 +19,8 @@ namespace Libary
 
                 Console.WriteLine("Please select a menu option");
                 Console.WriteLine("1) Add a new item\n2) Remove an item" +
-                    "\n3) Edit an item\n4) Print list\n0) Quit");
+                    "\n3) Edit an item\n4) Print list\n5) Save\n6) Load" +
+                    "0) Quit");
               bool ok = int.TryParse(Console.ReadLine(), out choice);
                 Book book = new Book();
                 AudioBook audio = new AudioBook();
@@ -128,6 +129,12 @@ namespace Libary
                         printList();
                         break;
 
+                    case 5:
+                        break;
+
+                    case 6:
+                        break;
+
                     default:
                         break;
                 }
@@ -206,7 +213,7 @@ namespace Libary
 
        static bool validOption (int choice)
         {
-            if (choice < 0 || choice > 4)
+            if (choice < 0 || choice > 6)
                 return false;
             else return true;
         }
@@ -218,6 +225,16 @@ namespace Libary
             else if (c=='Y' || c=='N')
                 return true;
             else return false;
+        }
+
+        static void saveList ()
+        {
+
+        }
+
+        static void loadList ()
+        {
+
         }
     }
 } 
