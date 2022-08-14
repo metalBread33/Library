@@ -26,5 +26,10 @@ namespace Library
             pages = pageCount;
 
         }
+
+        public override string ToString()
+        {
+            return base.ToString() + "Format: Book";
+        }
     } 
 }

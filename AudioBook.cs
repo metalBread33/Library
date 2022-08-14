@@ -14,5 +14,10 @@ namespace Library
         {
 
         }
+
+        public override string ToString()
+        {
+            return base.ToString() + "Format: Audiobook";
+        }
     }
 }

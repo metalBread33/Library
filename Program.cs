@@ -1,15 +1,18 @@
 ﻿using System;
 using Library;
+using Newtonsoft.Json;
 
 namespace Libary
 {
     internal class Program
     {
         static List<Item> items = new List<Item>();
+        static string filePath = @"C:\Users\kfoug\Desktop\Library\books.txt";
          static void Main(string[] args)
         {
             int choice, numItems = 0;
             char fin;
+            
 
             Console.WriteLine("Welcome to Library Program");
 
@@ -20,16 +23,17 @@ namespace Libary
                 Console.WriteLine("Please select a menu option");
                 Console.WriteLine("1) Add a new item\n2) Remove an item" +
                     "\n3) Edit an item\n4) Print list\n5) Save\n6) Load" +
-                    "0) Quit");
+                    "\n0) Quit");
               bool ok = int.TryParse(Console.ReadLine(), out choice);
                 Book book = new Book();
                 AudioBook audio = new AudioBook();
                 while (!validOption(choice) || !ok)
                 {
                     Console.WriteLine("Please enter a valid menu option " +
-                        "(must be between 0 and 4");
+                        "(must be between 0 and 6");
                     Console.WriteLine("1) Add a new item\n2) Remove an item" +
-                   "\n3) Edit an item\n4) Print list\n0) Quit");
+                     "\n3) Edit an item\n4) Print list\n5) Save\n6) Load" +
+                     "\n0) Quit");
                     ok = int.TryParse(Console.ReadLine(), out choice);
                 }
 
@@ -130,9 +134,11 @@ namespace Libary
                         break;
 
                     case 5:
+                        saveList();
                         break;
 
                     case 6:
+                        loadList();
                         break;
 
                     default:
@@ -229,12 +235,14 @@ namespace Libary
 
         static void saveList ()
         {
-
+            var json = JsonConvert.SerializeObject(items);
+            File.WriteAllText(filePath, json);
         }
 
         static void loadList ()
         {
-
+            string read = File.ReadAllText(filePath);
+            items = JsonConvert.DeserializeObject<Item>(read);
         }
     }
 } 
